@@ -1,6 +1,10 @@
 # Django settings for horasMedicas project.
+import os
 
 DEBUG = True
+
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,8 +15,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'medicHours',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -50,7 +54,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = PROJECT_PATH+"/../media/"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -108,6 +112,8 @@ ROOT_URLCONF = 'horasMedicas.urls'
 WSGI_APPLICATION = 'horasMedicas.wsgi.application'
 
 TEMPLATE_DIRS = (
+    PROJECT_PATH + "/../templates/",
+    PROJECT_PATH + "/../adminHours/templates/",
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -121,7 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'bootstrap_toolkit',
@@ -155,3 +161,4 @@ LOGGING = {
         },
     }
 }
+print(PROJECT_PATH)
