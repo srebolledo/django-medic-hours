@@ -1,4 +1,8 @@
 from django.conf.urls import patterns, include, url
+import os 
+site_media = os.path.join( 
+    os.path.dirname(__file__),  '../assets' 
+) 
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,5 +18,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^adminHours/', include('adminHours.urls'))
+    url(r'^adminHours/', include('adminHours.urls')),
+    (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
+      {'document_root': site_media})
 )
