@@ -1,4 +1,4 @@
 #common requirements
 django-bootstrap-toolkit
 django-extensions
-
+sentry==dev
