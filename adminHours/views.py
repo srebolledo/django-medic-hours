@@ -1,9 +1,11 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.shortcuts import render
 from django.template import RequestContext, loader
-
+from adminHours.models import Center, Speciality, Person, Medic, Patient, MedicSession, Payment
 
 def index(request):
-  template = loader.get_template('adminHours/index.html')
-  context = RequestContext(request, {'foo': 'bar'})
-  return HttpResponse(template.render(context))
+  return render(request, 'adminHours/index.html', {'foo':'bar'})
+
+def viewHours(request):
+  getHours = MedicSession.objects.filter(medic__id=1)
+  return render(request, 'adminHours/reserveHour.html', {'hours': getHours})

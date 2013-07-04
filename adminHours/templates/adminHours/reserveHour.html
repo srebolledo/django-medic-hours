@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Index adminHours {% endblock %}
+
+{% block scripts%}
+<link rel='stylesheet' type='text/css' href='/assets/js/plugins/jquery-week-calendar/libs/css/smoothness/jquery-ui-1.8.11.custom.css' />
+    <link rel='stylesheet' type='text/css' href='/assets/js/plugins/jquery-week-calendar/jquery.weekcalendar.css' />
+    <link rel="stylesheet" type="text/css" href="/assets/js/plugins/jquery-week-calendar/skins/default.css" />
+    <script type="text/javascript" src="/assets/js/jquery.js" sync></script>
+    <script type='text/javascript' src='/assets/js/plugins/jquery-week-calendar/libs/jquery-1.4.4.min.js'></script>
+    <script type='text/javascript' src='/assets/js/plugins/jquery-week-calendar/libs/jquery-ui-1.8.11.custom.min.js'></script>
+    <script type="text/javascript" src="/assets/js/plugins/jquery-week-calendar/libs/date.js"></script>
+    <script type='text/javascript' src='/assets/js/plugins/jquery-week-calendar/jquery.weekcalendar.js'></script>
+
+{% endblock %}
+
+{% block content %}
+ <script type='text/javascript'>
+      var hours = {
+        options: {
+          timeslotsPerHour: 3,
+          timeslotHeight: 30,
+          allowEventDelete: true,
+          timeslotsPerHour: 1,
+          scrollToHourMillis : 0,
+          daysToShow: 5,
+          displayOddEven: true,
+          use24Hour: true,
+          timeslotHeight: 60,
+          hourLine: true,
+          dateFormat: "d-M-Y",
+          preventDragOnEventCreation: false,
+          defaultEventLength: 1,
+          allowEventDelete: true,
+          businessHours: {start: 9, end: 20, limitDisplay: true}
+        },
+    events : [
+        {% for hour in hours %}
+          { 'id': {{hour.id}}, start: new Date('{{hour.created.isoformat}}'), end: new Date('{{hour.end.isoformat}}'), title: 'Cita {{hour.patient.name}}' },
+        {% endfor %}
+      ]
+    };
+      $(document).ready(function() {
+        var $calendar = $('#calendar').weekCalendar({
+          timeslotsPerHour: 1,
+          scrollToHourMillis : 0,
+          daysToShow: 5,
+          displayOddEven: true,
+          use24Hour: true,
+          timeslotHeight: 60,
+          hourLine: true,
+          dateFormat: "d-M-Y",
+          preventDragOnEventCreation: false,
+          defaultEventLength: 1,
+          allowEventDelete: true,
+          businessHours: {start: 9, end: 20, limitDisplay: true},
+          height: function($calendar){
+            return $(window).height() - $('h1').outerHeight(true);
+          },
+          eventRender : function(calEvent, $event) {
+            if(calEvent.end.getTime() < new Date().getTime()) {
+              // $event.css('backgroundColor', '#aaa');
+              // $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
+            }
+          },
+          beforeEventNew: function(calEvent, $event){
+            calEvent.end = new Date(calEvent.end - 60*60*60000);
+
+
+          },
+          eventNew : function(calEvent, $event) {
+          },
+          data: function(start, end, callback) {
+            if(hours.events.length >0){
+              callback(hours);
+            }
+
+          }
+        });
+
+      });
+    </script>
+
+    <div id="calendar"></div>
+
+{% endblock %}

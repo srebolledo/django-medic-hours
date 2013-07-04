@@ -2,3 +2,4 @@
 django-bootstrap-toolkit
 django-extensions
 sentry==dev
+django-debug-toolbar
