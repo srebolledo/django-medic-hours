@@ -20,5 +20,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^adminHours/', include('adminHours.urls')),
     (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
-      {'document_root': site_media})
+      {'document_root': site_media}),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login')
 )

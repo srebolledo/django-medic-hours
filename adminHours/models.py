@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Center(models.Model):
@@ -11,23 +12,23 @@ class Speciality(models.Model):
   def __unicode__(self):
     return self.name
 
-class Person(models.Model):
-  name = models.CharField(max_length=200)
-  email = models.CharField(max_length=200)
-  created = models.DateTimeField()
-  modified = models.DateTimeField()
-  def __unicode__(self):
-    return self.name
+# class Person(User):
+#   modified = models.DateTimeField()
+#   def __unicode__(self):
+#     return self.name
 
-class Medic(Person):
+class Medic(User):
   speciality = models.ForeignKey(Speciality)
-  def __unicode__(self):
-    return self.name
 
-class Patient(Person):
+  def getClassName():
+    return "Medic"
+
+class Patient(User):
+  verbose_name = "patient"
   alert = models.BooleanField()
-  def __unicode__(self):
-    return self.name
+
+  def getClassName():
+    return "Patient"
 
 class MedicSession(models.Model):
   medic   = models.ForeignKey(Medic)
