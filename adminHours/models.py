@@ -11,6 +11,7 @@ class UserRole(models.Model):
 
 class Center(models.Model):
     name = models.CharField('Nombre', blank=False, null=False, max_length=255)
+    direction = models.CharField('Direccion', max_length=255)
 
     class Meta:
         db_table = 'centro'
@@ -20,9 +21,10 @@ class Person(AbstractBaseUser):
     name = models.CharField('Nombre', max_length=255, null=False, blank=False)
     last_name = models.CharField('Apellido', max_length=255, null=False, blank=False)
     phone = models.PositiveSmallIntegerField('Telefono')
-    email = models.EmailField('E-Mail', blank=False, null=False)
-
     is_active = models.BooleanField(default=True)
+    USERNAME_FIELD = 'email'
+    email = models.EmailField(max_length=254, unique=True, db_index=True)
+
     # user_role = models.ForeignKey(UserRole)
 
     class Meta:

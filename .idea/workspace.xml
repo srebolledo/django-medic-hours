@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ddd5c7b-0cae-4ecb-b9b8-5f76336775d2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/other.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
-      <change type="DELETED" beforePath="C:\cygwin\home\srebolledo\dev\django-medic-hours\.idea\inspectionProfiles\profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\cygwin\home\srebolledo\dev\django-medic-hours\medicHours" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/medicHours" afterPath="$PROJECT_DIR$/medicHours" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminHours/admin.py" afterPath="$PROJECT_DIR$/adminHours/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/django-medic-hours.iml" afterPath="$PROJECT_DIR$/.idea/django-medic-hours.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminHours/models.py" afterPath="$PROJECT_DIR$/adminHours/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horasMedicas/settings.py" afterPath="$PROJECT_DIR$/horasMedicas/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminHours/views.py" afterPath="$PROJECT_DIR$/adminHours/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/other.xml" afterPath="$PROJECT_DIR$/.idea/other.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/testrunner.xml" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="django-medic-hours.iws" />
@@ -39,7 +36,7 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/adminHours/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="16" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
+            <state line="38" column="0" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -48,7 +45,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/adminHours/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="76" selection-start="522" selection-end="522" vertical-scroll-proportion="0.4311594">
+            <state line="14" column="33" selection-start="479" selection-end="479" vertical-scroll-proportion="0.4311594">
               <folding>
                 <element signature="e#26#61#0" expanded="true" />
               </folding>
@@ -344,14 +341,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/adminHours/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="16" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
+        <state line="38" column="0" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/adminHours/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="76" selection-start="522" selection-end="522" vertical-scroll-proportion="0.4311594">
+        <state line="14" column="33" selection-start="479" selection-end="479" vertical-scroll-proportion="0.4311594">
           <folding>
             <element signature="e#26#61#0" expanded="true" />
           </folding>
