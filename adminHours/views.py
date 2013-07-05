@@ -10,6 +10,6 @@ def index(request):
 
 @login_required
 def viewHours(request):
-  if request.user.getClassName == "Medic":
+  if request.user.user_type == "Specialist":
     getHours = Session.objects.filter(specialist__id=request.user.id)
   return render(request, 'adminHours/reserveHour.html', {'hours': getHours})

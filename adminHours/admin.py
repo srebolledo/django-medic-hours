@@ -1,10 +1,8 @@
 from django.contrib import admin
-from adminHours.models import Medic, Patient, Center, MedicSession, Payment, Speciality
+from adminHours.models import *
 
-admin.site.register(Medic)
+admin.site.register(UserRole)
+admin.site.register(SpecialistType)
 admin.site.register(Patient)
-admin.site.register(Center)
-admin.site.register(MedicSession)
-admin.site.register(Payment)
-admin.site.register(Speciality)
-
+admin.site.register(Specialist)
+admin.site.register(Session)

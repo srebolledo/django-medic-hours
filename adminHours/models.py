@@ -1,21 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser
 
-# Create your models here.
-class UserRole(self):
+
+class UserRole(models.Model):
     user_type = models.CharField('Tipo Usuario', max_length=255, blank=False, null=False)
 
     def __unicode__(self):
         return self.user_type
 
 
-
 class Center(models.Model):
-    name = models.CharField('Nombre', blank=False, null=False)
+    name = models.CharField('Nombre', blank=False, null=False, max_length=255)
 
     class Meta:
         db_table = 'centro'
+
 
 class Person(AbstractBaseUser):
     name = models.CharField('Nombre', max_length=255, null=False, blank=False)
@@ -24,21 +23,21 @@ class Person(AbstractBaseUser):
     email = models.EmailField('E-Mail', blank=False, null=False)
 
     is_active = models.BooleanField(default=True)
-    user_role = models.ForeignKey(UserRole)
+    # user_role = models.ForeignKey(UserRole)
 
     class Meta:
         abstract = True
 
 
 class SpecialistType(models.Model):
-    type = models.CharField('Tipo Especialista', max_length=255, blank=False, null=False)
+    type_specialist = models.CharField('Tipo Especialista', max_length=255, blank=False, null=False)
 
     class Meta:
         db_table = 'tipo_especialista'
 
 
 class Specialist(Person):
-    type = models.ForeignKey(SpecialistType)
+    type_specialist = models.ForeignKey(SpecialistType)
     center = models.ForeignKey(Center)
 
     class Meta:
@@ -46,12 +45,17 @@ class Specialist(Person):
 
 
 class Patient(Person):
-    rate = models.PositiveSmallIntegerField('Valor Sesion')
-    specialist = models.ForeignKey(Especialista)
     alerts = models.BooleanField(default=True)
+    membership = models.ManyToManyField(Specialist, through='Attending')
 
     class Meta:
         db_table = 'patient'
+
+
+class Attending(models.Model):
+    specialist = models.ForeignKey(Specialist)
+    patient = models.ForeignKey(Patient)
+    date_created = models.DateTimeField(auto_now_add=True)
 
 
 class Session(models.Model):
@@ -59,12 +63,13 @@ class Session(models.Model):
     specialist = models.ForeignKey(Specialist)
     date_created = models.DateTimeField(auto_now_add=True)
     date_session = models.DateTimeField()
+    rate = models.PositiveSmallIntegerField('Valor Sesion')
 
     class Meta:
         db_table = 'session'
 
 
-
-
-
-
+class Payment(models.Model):
+    patient = models.ForeignKey(Patient)
+    specialist = models.ForeignKey(Specialist)
+    rate = models.PositiveSmallIntegerField('Valor Sesion')
