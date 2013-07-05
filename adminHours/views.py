@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
-from adminHours.models import Center, Speciality, Medic, Patient, MedicSession, Payment
+from adminHours.models import *
 
 
 def index(request):
@@ -11,5 +11,5 @@ def index(request):
 @login_required
 def viewHours(request):
   if request.user.getClassName == "Medic":
-    getHours = MedicSession.objects.filter(medic__id=request.user.id)
+    getHours = Session.objects.filter(specialist__id=request.user.id)
   return render(request, 'adminHours/reserveHour.html', {'hours': getHours})

@@ -1,47 +1,67 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
+class UserRole(self):
+    user_type = models.CharField('Tipo Usuario', max_length=255, blank=False, null=False)
+
+    def __unicode__(self):
+        return self.user_type
+
+
 
 class Center(models.Model):
-  name = models.CharField(max_length=200)
-  direction = models.CharField(max_length=200)
+    name = models.CharField('Nombre', blank=False, null=False)
 
-class Speciality(models.Model):
-  name = models.CharField(max_length=200)
-  def __unicode__(self):
-    return self.name
+    class Meta:
+        db_table = 'centro'
 
-# class Person(User):
-#   modified = models.DateTimeField()
-#   def __unicode__(self):
-#     return self.name
+class Person(AbstractBaseUser):
+    name = models.CharField('Nombre', max_length=255, null=False, blank=False)
+    last_name = models.CharField('Apellido', max_length=255, null=False, blank=False)
+    phone = models.PositiveSmallIntegerField('Telefono')
+    email = models.EmailField('E-Mail', blank=False, null=False)
 
-class Medic(User):
-  speciality = models.ForeignKey(Speciality)
+    is_active = models.BooleanField(default=True)
+    user_role = models.ForeignKey(UserRole)
 
-  def getClassName():
-    return "Medic"
+    class Meta:
+        abstract = True
 
-class Patient(User):
-  verbose_name = "patient"
-  alert = models.BooleanField()
 
-  def getClassName():
-    return "Patient"
+class SpecialistType(models.Model):
+    type = models.CharField('Tipo Especialista', max_length=255, blank=False, null=False)
 
-class MedicSession(models.Model):
-  medic   = models.ForeignKey(Medic)
-  patient = models.ForeignKey(Patient)
-  created = models.DateTimeField()
-  end     = models.DateTimeField()
-  def __unicode__(self):
-    return self.medic.name + " / " +self.patient.name + " - " + str(self.created)
+    class Meta:
+        db_table = 'tipo_especialista'
 
-class Payment(models.Model):
-  medicSession = models.ForeignKey(MedicSession)
-  datePayment = models.DateTimeField()
-  isPayed = models.BooleanField()
+
+class Specialist(Person):
+    type = models.ForeignKey(SpecialistType)
+    center = models.ForeignKey(Center)
+
+    class Meta:
+        db_table = 'specialist'
+
+
+class Patient(Person):
+    rate = models.PositiveSmallIntegerField('Valor Sesion')
+    specialist = models.ForeignKey(Especialista)
+    alerts = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = 'patient'
+
+
+class Session(models.Model):
+    patient = models.ForeignKey(Patient)
+    specialist = models.ForeignKey(Specialist)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_session = models.DateTimeField()
+
+    class Meta:
+        db_table = 'session'
 
 
 
