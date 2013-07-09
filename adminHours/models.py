@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 
 
 class UserRole(models.Model):
@@ -17,15 +17,17 @@ class Center(models.Model):
         db_table = 'centro'
 
 
-class Person(AbstractBaseUser):
+class Person(models.Model):
+    user = models.ForeignKey(User)
     name = models.CharField('Nombre', max_length=255, null=False, blank=False)
     last_name = models.CharField('Apellido', max_length=255, null=False, blank=False)
-    phone = models.PositiveSmallIntegerField('Telefono')
+    phone = models.PositiveSmallIntegerField('Telefono', null=True)
     is_active = models.BooleanField(default=True)
-    USERNAME_FIELD = 'email'
+
+    # USERNAME_FIELD = 'email'
     email = models.EmailField(max_length=254, unique=True, db_index=True)
 
-    # user_role = models.ForeignKey(UserRole)
+    user_role = models.ForeignKey(UserRole)
 
     class Meta:
         abstract = True
@@ -37,6 +39,8 @@ class SpecialistType(models.Model):
     class Meta:
         db_table = 'tipo_especialista'
 
+    def __unicode__(self):
+      return self.type_specialist
 
 class Specialist(Person):
     type_specialist = models.ForeignKey(SpecialistType)
@@ -45,6 +49,9 @@ class Specialist(Person):
     class Meta:
         db_table = 'specialist'
 
+    def __unicode__(self):
+      return self.type_specialist.type_specialist+" "+self.name+" "+self.last_name
+
 
 class Patient(Person):
     alerts = models.BooleanField(default=True)
@@ -52,6 +59,9 @@ class Patient(Person):
 
     class Meta:
         db_table = 'patient'
+
+    def __unicode__(self):
+      return self.name+" "+self.last_name
 
 
 class Attending(models.Model):
